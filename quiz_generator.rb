@@ -15,15 +15,14 @@ class QuizGenerator
   end
 
   def get_questions_for_quiz(num)
+    strand1 = @questions.select {|q_id, key| key[:strand_id] == "1"}
+    strand2 = @questions.select {|q_id, key| key[:strand_id] == "2"}
+
     if (num.to_i % 2) == 0
       # even
-      strand1 = @questions.select {|q_id, key| key[:strand_id] == 1}
-      strand2 = @questions.select {|q_id, key| key[:strand_id] == 2}
     else
       # odd
     end
-    puts strand1.inspect
-    puts strand2.inspect
   end
 
   private
