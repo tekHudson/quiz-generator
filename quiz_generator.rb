@@ -2,12 +2,14 @@ require 'csv'
 class QuizGenerator
   def initialize input_stream, output_stream
     @input_stream = input_stream
+    @output_stream = output_stream
     @questions = {}
-    build_questions
+    populate_questions
   end
 
-  def get_num_questions_requested
+  def get_num_questions
     puts "How many questions would you like to include in the quiz? "
+    @output_stream.flush
     get_input
   end
 
@@ -15,10 +17,10 @@ class QuizGenerator
 
 
   def get_input
-    @input_stream.gets.chomp if @input_stream.gets.to_i > 0
+    @input_stream.gets.chomp
   end
 
-  def build_questions
+  def populate_questions
     CSV.foreach("questions.csv") do |row|
       next unless row[0].to_i > 0
       @questions[row[4]] = { difficulty: row[5] }

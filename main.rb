@@ -3,4 +3,4 @@ require_relative 'quiz_generator'
 
 quiz = QuizGenerator.new(STDIN, STDOUT)
 
-numquiz.get_num_questions_requested
+num_questions = quiz.get_num_questions
