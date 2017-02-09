@@ -36,11 +36,11 @@ class QuizGenerator
   def populate_questions
     CSV.foreach("questions.csv") do |row|
       next unless row[0].to_i > 0
-      @questions[row[4].to_i]= { difficulty: row[5],
+      @questions[row[4].to_i]= { strand_id: row[0],
+                                 strand_name: row[1],
                                  standard_id: row[2],
                                  standard_name: row[3],
-                                 strand_id: row[0],
-                                 strand_name: row[1] }
+                                 difficulty: row[5] }
     end
   end
 end
