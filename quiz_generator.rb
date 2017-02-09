@@ -15,14 +15,24 @@ class QuizGenerator
   end
 
   def get_questions_for_quiz(num)
+    num = num.to_i
     strand1 = @questions.select {|q_id, key| key[:strand_id] == "1"}
     strand2 = @questions.select {|q_id, key| key[:strand_id] == "2"}
 
-    if (num.to_i % 2) == 0
+    if (num % 2) == 0
       # even
+      num_to_add = num / 2
+      @questions_for_quiz << strand1.keys[0..num_to_add-1]
+      @questions_for_quiz << strand2.keys[0..num_to_add-1]
     else
       # odd
+      small_num_to_add = num / 2
+      num_to_add = num / 2
+      @questions_for_quiz << strand1.keys[0..small_num_to_add]
+      @questions_for_quiz << strand2.keys[0..num_to_add-1]
     end
+
+    @questions_for_quiz.flatten!
   end
 
   private
